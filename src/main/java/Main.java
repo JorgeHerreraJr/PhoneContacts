@@ -3,8 +3,9 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static ArrayList<Contacts> contacts;
+    private static ArrayList<Contact> contacts;
     private static Scanner scanner;
+
     public static void main(String[] args) {
 
     contacts = new ArrayList<>();
@@ -58,6 +59,80 @@ public class Main {
                 showOptions();
                 break;
         }
+    }
+
+    private static void deleteContact() {
+        System.out.println("Enter contact name:");
+        String name = scanner.nextLine();
+        if (name.equals("")) {
+            System.out.println("Please enter a name:");
+            deleteContact();
+        } else {
+            boolean exists = false;
+            for (Contact c: contacts ) {
+                if (c.getName().equals(name)) {
+                    exists = true;
+                    contacts.remove(c);
+                }
+            }
+
+            if(!exists) {
+                System.out.println("Contact does not exist");
+            }
+        }
+
+        showOptions();
+    }
+
+    private static void searchContact() {
+        System.out.println("Enter contact name: ");
+        String name = scanner.nextLine();
+        if (name.equals("")) {
+            System.out.println("Please enter a name: ");
+            searchContact();
+        } else {
+            boolean exists = false;
+            for (Contact c: contacts) {
+                if (c.getName().equals(name)) {
+                    exists = true;
+                    c.getDetails();
+                }
+            }
+
+            if (!exists) {
+                System.out.println("Does not exist in contacts");
+            }
+        }
+
+        showOptions();
+    }
+
+    private static void addNewContact() {
+        System.out.println("Adding new contact..." +
+                "\nEnter New Contact: ");
+        String name = scanner.nextLine();
+        System.out.println("Enter contact's number:");
+        String number = scanner.nextLine();
+        System.out.println("Enter contact's email:");
+        String email = scanner.next();
+
+        if (name.equals("") || number.equals("") || email.equals("")) {
+            System.out.println("Please Enter Information");
+            addNewContact();
+        } else {
+            Contact contact = new Contact(name, number, email);
+            contacts.add(contact);
+        }
+
+        showOptions();
+    }
+
+    private static void showAllContacts() {
+        for (Contact c: contacts) {
+            c.getDetails();
+        }
+
+        showOptions();
     }
 
 
