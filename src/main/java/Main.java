@@ -43,7 +43,7 @@ public class Main {
         switch (choice) {
             case 1:
                 showAllMessages();
-                break;;
+                break;
             case 2:
                 sendNewMessage();
                 break;
@@ -55,7 +55,7 @@ public class Main {
 
     private static void sendNewMessage() {
         System.out.println("Who will you message?: ");
-        String name = scanner.nextLine();
+        String name = scanner.next();
         if (name.equals("")) {
             System.out.println("Please enter a name:");
             sendNewMessage();
@@ -67,7 +67,7 @@ public class Main {
                 }
             }
 
-            if (!exists) {
+            if (exists) {
                 System.out.println("Write your message: ");
                 String text = scanner.next();
                 if (text.equals("")) {
@@ -80,10 +80,7 @@ public class Main {
                         if (c.getName().equals(name)) {
                             ArrayList<Message> newMessages = c.getMessages();
                             newMessages.add(newMessage);
-                            Contact currentContact = c;
-                            currentContact.setMessages((newMessages));
-                            contacts.remove(c);
-                            contacts.add(currentContact);
+                            c.setMessages(newMessages);
                         }
                     }
                 }
@@ -126,7 +123,7 @@ public class Main {
                 break;
             case 2:
                 addNewContact();
-                break;;
+                break;
             case 3:
                 searchContact();
                 break;
@@ -141,7 +138,7 @@ public class Main {
 
     private static void deleteContact() {
         System.out.println("Enter contact name:");
-        String name = scanner.nextLine();
+        String name = scanner.next();
         if (name.equals("")) {
             System.out.println("Please enter a name:");
             deleteContact();
@@ -164,7 +161,7 @@ public class Main {
 
     private static void searchContact() {
         System.out.println("Enter contact name: ");
-        String name = scanner.nextLine();
+        String name = scanner.next();
         if (name.equals("")) {
             System.out.println("Please enter a name: ");
             searchContact();
@@ -188,9 +185,9 @@ public class Main {
     private static void addNewContact() {
         System.out.println("Adding new contact..." +
                 "\nEnter New Contact: ");
-        String name = scanner.nextLine();
+        String name = scanner.next();
         System.out.println("Enter contact's number:");
-        String number = scanner.nextLine();
+        String number = scanner.next();
         System.out.println("Enter contact's email:");
         String email = scanner.next();
 
